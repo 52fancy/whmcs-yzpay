@@ -47,7 +47,6 @@ class yzpay_link
 			$status = '
 			<!--
 				可用变量
-				$id       - 账单ID
 				$qr_url   - 支付链接
 				$qr_code  - 二维码
 
@@ -63,9 +62,9 @@ class yzpay_link
 			var paid_timeout = setInterval(go, 3000);
 			function go()
 			{
-				$.get("/viewinvoice.php?id={$id}",function(data)
+				$.get(window.location.href,function(data)
 					{
-						if (data.indexOf("unpaid") == -1)
+						if (data.search(/<span\sclass=.paid.>/) != -1)
 						{
 							clearInterval(paid_timeout);
 							alert("支付完成");
@@ -76,7 +75,7 @@ class yzpay_link
 			}
 			</script>
 			<a href= "{$qr_url}" ><img src= "{$qr_code}" /><br><img src="https://ws2.sinaimg.cn/large/006f1tRAly1fuhfz1u8fxj30g405kwf9.jpg" style="width:120px;"><br>支付宝 - 微信 - 银联支付</a>';
-			$status_raw = str_replace(['{$id}','{$qr_url}','{$qr_code}'],[$params['invoiceid'],$result['response']['qr_url'],$result['response']['qr_code']],$status);
+			$status_raw = str_replace(['{$qr_url}','{$qr_code}'],[$result['response']['qr_url'],$result['response']['qr_code']],$status);
             return $status_raw;
 		}else
 		{
