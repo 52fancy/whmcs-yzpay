@@ -51,7 +51,7 @@ class yzpay_link
 				$qr_code  - 二维码
 
 			-->
-			<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 			<script>
 			setTimeout(stop, 300000);
 			function stop()
